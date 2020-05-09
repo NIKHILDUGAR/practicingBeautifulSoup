@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 src=requests.get("https://coreyms.com/").text
 soup=BeautifulSoup(src,'lxml')
+article=soup.find('article')
 print(article.prettify())
 headline=article.a.text
 print(headline)
