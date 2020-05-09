@@ -18,10 +18,11 @@ f = open(filename, "w")
 headers = "Product_Name, Pricing, Ratings \n"
 f.write(headers)
 for container in containers:
-    product_name = container.div.img["alt"]
+    name_container = container.findAll("div",{"class": "_3liAhj"})
     price_container = container.findAll("div", {"class": "_1vC4OE"})
     rating_container = container.findAll("div", {"class": "niH0FQ"})
     for i in range(len(price_container)):
+        product_name =name_container[i].img['alt']
         price = price_container[i].text.strip()
         trim_price = ''.join(price.split(','))
         rm_rupee = trim_price.split('₹')
@@ -33,5 +34,5 @@ for container in containers:
             split_rating = split_rating[0].split("(")
             final_rating = split_rating[0]
         except:final_rating="Not Rated"
-        f.write(product_name.replace(",", "|") + "," + final_price + "," + final_rating + "\n")
+        f.write(str(product_name).replace(",", "|") + "," + final_price + "," + final_rating + "\n")
 f.close()
