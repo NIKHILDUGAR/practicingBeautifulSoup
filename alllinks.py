@@ -6,6 +6,11 @@ import lxml.html
 import lxml
 from selectolax.parser import HTMLParser
 k=input()
+try:
+    r=requests.get(k)
+except:
+    r = requests.get("http://"+k)
+    k="http://"+k
 def extractlink(s):
     l=[]
     dom = HTMLParser(s)
@@ -38,7 +43,7 @@ def linkextractorlxml(s):
         else:
             l.append(i)
     return l
-r=requests.get(k)
+
 from bs4 import BeautifulSoup as bs
 def extractbs(s):
     l=[]
@@ -50,7 +55,7 @@ def extractbs(s):
             if tag["href"]:
                 l.append(tag["href"])
     return l
-r=requests.get(k)
+
 for i in extractbs(r.text):
     print("URLS of the website - " , i)
 for i in extractlink(r.text):
